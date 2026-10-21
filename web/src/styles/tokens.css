@@ -1,0 +1,76 @@
+/*
+ * Design tokens: "survey sheet" engineering tool.
+ * Paper and ink for the chrome, one accent (UK primary-route green) for selection
+ * and focus. Severity colours are reserved for data only.
+ */
+:root {
+  color-scheme: light;
+
+  /* surfaces */
+  --paper: #f4f2ec;
+  --paper-raised: #fbfaf7;
+  --paper-sunk: #ebe8df;
+  --rule: #d8d3c6;
+  --rule-strong: #b9b2a2;
+
+  /* ink */
+  --ink: #1c2126;
+  --ink-2: #4a5159;
+  --ink-3: #7a8089;
+  --ink-inverse: #fbfaf7;
+
+  /* accent: primary route green */
+  --accent: #0a6b45;
+  --accent-ink: #ffffff;
+  --accent-wash: #e1efe7;
+
+  /* severity (data only). Validated with the dataviz palette checker on --paper and
+     --paper-raised: lightness band, chroma, CVD separation (worst deutan dE 14.6),
+     normal-vision floor and >= 3:1 contrast all pass. Also encoded by size on the map. */
+  --sev-fatal: #a8282d;
+  --sev-serious: #c96a0c;
+  --sev-slight: #2f6db5;
+
+  /* traffic flow (one magnitude, one hue). Told apart from severity by shape on the map
+     (rings, dashed links); see components/map/trafficLayers.ts. */
+  --traffic: #8a2c99;
+  --traffic-wash: #ead3ee;
+
+  --warn: #8a5a00;
+  --warn-wash: #fbf1d9;
+
+  /* type */
+  --font-sans: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 0.875rem;
+  --text-lg: 1.0625rem;
+  --text-xl: 1.375rem;
+  --tracking-caps: 0.08em;
+
+  /* space (4px rhythm, with an 'air' step for section breaks) */
+  --s1: 4px;
+  --s2: 8px;
+  --s3: 12px;
+  --s4: 16px;
+  --s5: 24px;
+  --air: 32px;
+
+  --radius: 3px;
+  --header-h: 52px;
+  --sheet-w: 312px;
+  --panel-w: 420px;
+
+  --shadow-float: 0 1px 2px rgb(28 33 38 / 0.08), 0 8px 24px rgb(28 33 38 / 0.12);
+  --duration-fast: 120ms;
+  --duration: 220ms;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --duration-fast: 0ms;
+    --duration: 0ms;
+  }
+}

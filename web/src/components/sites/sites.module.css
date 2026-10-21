@@ -1,0 +1,50 @@
+/* Sites view: the method switch sits under the panel title, above either method's content. */
+
+.switchBlock {
+  margin: var(--s2) 0 var(--s3);
+}
+
+.switch {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.switch button {
+  padding: 6px var(--s2);
+  border: none;
+  background: var(--paper-raised);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.switch button + button {
+  border-left: 1px solid var(--rule-strong);
+}
+
+.switch button:hover {
+  background: var(--paper-sunk);
+}
+
+.switch button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.switch button[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.switchNote {
+  margin: var(--s1) 0 0;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: 1.4;
+}

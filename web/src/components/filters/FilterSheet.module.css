@@ -1,0 +1,261 @@
+.sheet {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--paper);
+  border-right: 1px solid var(--rule);
+  padding-bottom: var(--air);
+}
+
+.head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  padding: var(--s4) var(--s4) var(--s3);
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-lg);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.count {
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  margin-right: auto;
+}
+
+.reset {
+  border: none;
+  background: none;
+  padding: 2px 4px;
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.reset:disabled {
+  color: var(--ink-3);
+  cursor: default;
+}
+
+.hide {
+  padding: 2px 6px;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: none;
+  font: inherit;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.hide:hover,
+.hide:focus-visible {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+/* numbered sections: the "spec sheet" rhythm */
+.section {
+  margin: 0;
+  padding: var(--s4) var(--s4) var(--s3);
+  border: none;
+  border-bottom: 1px solid var(--rule);
+  min-width: 0;
+}
+
+/* float the legend so it sits inside the fieldset's padding like a normal heading */
+.legend {
+  float: left;
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  padding: 0;
+  margin-bottom: var(--s3);
+  font-weight: 600;
+  font-size: var(--text-base);
+  width: 100%;
+}
+
+.num {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.legend + * {
+  clear: both;
+}
+
+.legendHint {
+  margin-left: auto;
+  font-weight: 400;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.group + .group {
+  margin-top: var(--s3);
+}
+
+.groupTitle {
+  margin: 0 0 6px;
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-2);
+  font-weight: 500;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  max-width: 100%;
+  padding: 3px 9px;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  background: var(--paper-raised);
+  font-size: var(--text-sm);
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.chip:hover {
+  border-color: var(--ink-2);
+}
+
+.chip[aria-pressed='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.chip:active {
+  transform: translateY(1px);
+}
+
+.more {
+  border: none;
+  background: none;
+  padding: 3px 4px;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.sevDot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  outline: 1px solid rgb(251 250 247 / 0.6);
+}
+
+.years {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--s2);
+}
+
+.years label {
+  display: grid;
+  gap: 2px;
+  flex: 1;
+}
+
+.years select,
+.times input {
+  height: 32px;
+  padding: 0 var(--s2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+}
+
+.dash {
+  padding-bottom: 6px;
+  color: var(--ink-3);
+}
+
+.times {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.hint {
+  margin: 6px 0 0;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.coverage {
+  margin: 0 0 6px;
+  padding: 4px 8px;
+  font-size: var(--text-xs);
+  color: var(--warn);
+  background: var(--warn-wash);
+  border-radius: var(--radius);
+}
+
+.radius {
+  display: grid;
+  gap: 4px;
+  margin-bottom: var(--s3);
+}
+
+.radius input[type='range'] {
+  accent-color: var(--accent);
+  width: 100%;
+}
+
+.areaNote {
+  margin: 0 0 var(--s2);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.authority {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 5px;
+  margin-top: var(--s2);
+}
+
+.authority select {
+  height: 32px;
+  min-width: 0;
+  padding: 0 var(--s2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-size: var(--text-sm);
+}
+
+.areaOnly {
+  margin: 0;
+  padding: var(--s3) var(--s4);
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+  line-height: 1.45;
+}

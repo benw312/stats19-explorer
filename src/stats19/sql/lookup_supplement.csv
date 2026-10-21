@@ -1,0 +1,4 @@
+table_name,field_name,code,label,note
+casualty,casualty_type,33,Personal powered transporter (e.g. e-scooter) rider or passenger,"FU-009: code absent from 2025 guide; 6,103 casualties 2020-2025, all linked to vehicle_type 33 'Personal powered transporter'"
+collision,collision_injury_based,-1,Not applicable (before injury-based reporting),"FU-009: guide labels only 0/1; -1 on 6.0M collisions from years before injury-based severity reporting"
+casualty,casualty_injury_based,-1,Not applicable (before injury-based reporting),"FU-009: guide labels only 0/1; -1 on 8.0M casualties from years before injury-based severity reporting"

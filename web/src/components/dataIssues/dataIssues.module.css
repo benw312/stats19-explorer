@@ -1,0 +1,66 @@
+/* DfT documented issue notes (FU-049): quiet, but never missable */
+.notes {
+  margin: var(--s2) 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: var(--s1);
+}
+
+.note {
+  display: flex;
+  gap: var(--s1);
+  align-items: baseline;
+  font-size: var(--text-xs);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.mark {
+  flex: none;
+  color: var(--warn);
+  font-weight: 700;
+}
+
+.text {
+  outline: none;
+}
+
+.text:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* the summary shows on hover/focus on wide screens, always on phones (no hover there) */
+.summary {
+  display: none;
+}
+
+.text:hover .summary,
+.text:focus .summary {
+  display: inline;
+}
+
+@media (hover: none) {
+  .summary {
+    display: inline;
+  }
+}
+
+.link {
+  flex: none;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 2px;
+  white-space: nowrap;
+}
+
+.link:hover {
+  text-decoration-color: var(--accent);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

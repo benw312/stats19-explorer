@@ -1,0 +1,61 @@
+# STATS19 web front door: static app, API proxy and self-hosted basemap.
+#
+# Two sites share one definition (the "app" snippet), so they can't drift apart:
+# - :80, the LAN site (published on the host as :8080; no login).
+# - :8081, the tunnel site (PLAN-006): only Cloudflare's tunnel reaches it, inside the
+#   Docker network; it isn't published on the host.
+# Each site sets X-Stats19-Edge on API requests ("lan" or "tunnel"), replacing anything a
+# client sent, so the LAN can't pretend to be the tunnel or the other way round. The API
+# requires a valid Cloudflare Access JWT on "tunnel" requests (stats19.api.access).
+
+(app) {
+	handle /api/* {
+		# Caddy's default list omits vector tiles; they compress 2-3x.
+		encode zstd gzip {
+			match {
+				# Repeated values for one header field are OR-ed.
+				header Content-Type text/*
+				header Content-Type application/json*
+				header Content-Type application/vnd.mapbox-vector-tile*
+			}
+		}
+		# Writes (V5 schemes) are small JSON; nothing legitimate is near this.
+		request_body {
+			max_size 2MB
+		}
+		reverse_proxy api:8000 {
+			header_up X-Stats19-Edge {args[0]}
+		}
+	}
+
+	# PMTiles needs HTTP Range requests: serve raw, no compression.
+	handle /basemap/* {
+		root * /srv
+		header Cache-Control "public, max-age=86400"
+		file_server
+	}
+
+	handle {
+		encode zstd gzip
+		root * /srv/www
+		try_files {path} /index.html
+		header /assets/* Cache-Control "public, max-age=31536000, immutable"
+		file_server
+	}
+
+	header {
+		X-Content-Type-Options nosniff
+		Referrer-Policy strict-origin-when-cross-origin
+		X-Frame-Options DENY
+		Permissions-Policy "camera=(), microphone=(), geolocation=()"
+		Content-Security-Policy "default-src 'self'; img-src 'self' data: blob:; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:; connect-src 'self'; font-src 'self'; frame-ancestors 'none'; base-uri 'self'; object-src 'none'"
+	}
+}
+
+:80 {
+	import app lan
+}
+
+:8081 {
+	import app tunnel
+}

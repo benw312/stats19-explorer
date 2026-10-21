@@ -1,0 +1,20 @@
+/* Page geometry for the PDF renderer (Chromium honours named pages). Margins come
+   from the renderer so the footer (page numbers) fits. */
+@page {
+  size: A4 portrait;
+}
+
+@page landscape {
+  size: A4 landscape;
+}
+
+html,
+body {
+  background: #fff;
+}
+
+/* charts' screen-only controls; links out (e.g. Google Maps) */
+[data-print-root] button,
+[data-print-root] [data-screen-only] {
+  display: none !important;
+}

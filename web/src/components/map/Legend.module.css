@@ -1,0 +1,135 @@
+.legend {
+  position: absolute;
+  left: var(--s4);
+  bottom: 44px;
+  z-index: 2;
+  width: 190px;
+  padding: var(--s3) var(--s4);
+  background: var(--paper-raised);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-float);
+}
+
+.list {
+  list-style: none;
+  margin: var(--s2) 0;
+  padding: 0;
+  display: grid;
+  gap: 6px;
+  font-size: var(--text-sm);
+}
+
+.list li {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+}
+
+.dot {
+  display: inline-block;
+  border-radius: 50%;
+  outline: 1px solid rgb(28 33 38 / 0.25);
+  flex: none;
+}
+
+.note {
+  margin: 0 0 var(--s2);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: 1.35;
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--text-sm);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--rule);
+  cursor: pointer;
+}
+
+.toggle input {
+  accent-color: var(--accent);
+}
+
+.external {
+  margin: var(--s2) 0 0;
+  padding-top: var(--s2);
+  border-top: 1px solid var(--rule);
+}
+
+.toggleTight {
+  border-top: none;
+  padding-top: var(--s1);
+}
+
+.trafficInput {
+  accent-color: var(--traffic) !important;
+}
+
+.trafficKey {
+  display: flex;
+  gap: var(--s2);
+  align-items: flex-start;
+  margin: var(--s1) 0 0;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: 1.35;
+}
+
+.ring {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 1px;
+  border: 2px solid var(--traffic);
+  border-radius: 50%;
+}
+
+.junctionRing {
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-top: 1px;
+  border: 1.5px solid var(--ink);
+  border-radius: 50%;
+  background: var(--paper-raised);
+}
+
+/* risk layer key: band swatches, thicker for worse bands (colour is never the only cue) */
+.riskKey {
+  display: grid;
+  gap: 2px;
+  margin: var(--s1) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.riskKey li {
+  display: flex;
+  gap: var(--s2);
+  align-items: center;
+}
+
+.riskSwatch {
+  flex: none;
+  width: 18px;
+  height: 3px;
+  border-radius: 2px;
+}
+
+.riskSwatch[data-band='3'] {
+  height: 7px;
+}
+
+.riskSwatch[data-band='2'] {
+  height: 6px;
+}
+
+.riskSwatch[data-band='1'] {
+  height: 5px;
+}

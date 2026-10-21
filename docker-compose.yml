@@ -1,0 +1,151 @@
+name: stats19
+
+# Docker keeps container logs forever by default: cap each container at ~50 MB (FU-050)
+x-logging: &logging
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "5"
+
+# Which code is running (FU-050): scripts/update.sh sets these from git
+x-version: &version
+  GIT_COMMIT: ${GIT_COMMIT:-unknown}
+  BUILD_DATE: ${BUILD_DATE:-}
+
+services:
+  db:
+    # Multi-arch (amd64 + arm64) PostGIS build; the official postgis/postgis image is amd64-only.
+    image: imresamu/postgis:17-3.5
+    restart: unless-stopped
+    logging: *logging
+    # Parallel queries share memory through /dev/shm. Docker on Linux gives 64 MB by
+    # default, which the reference builds outgrow ("could not resize shared memory segment").
+    # 2 GB leaves room for ten heavy API queries at once; it only uses memory while in use.
+    shm_size: 2g
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-stats19}
+      POSTGRES_USER: ${POSTGRES_USER:-stats19}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD in .env}
+    command:
+      - postgres
+      - -c
+      - shared_buffers=${PG_SHARED_BUFFERS:-1GB}
+      - -c
+      - maintenance_work_mem=${PG_MAINTENANCE_WORK_MEM:-1GB}
+      - -c
+      - work_mem=64MB
+      - -c
+      - max_wal_size=8GB
+      - -c
+      - checkpoint_timeout=15min
+      - -c
+      - log_min_duration_statement=2000  # log queries over 2 s (DEPLOY.md → Debugging)
+    ports:
+      # Localhost-only by default; set POSTGRES_BIND=0.0.0.0 to allow LAN clients.
+      - "${POSTGRES_BIND:-127.0.0.1}:${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  pipeline:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args: *version
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      STATS19_DATABASE_URL: postgresql://${POSTGRES_USER:-stats19}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-stats19}
+      STATS19_DATA_DIR: /data
+      STATS19_KEEP_RELEASES: ${STATS19_KEEP_RELEASES:-2}
+      # lets the API's read-only role log in (PLAN-006 C4; set on migrate)
+      STATS19_API_DB_PASSWORD: ${STATS19_API_DB_PASSWORD:-}
+    volumes:
+      - downloads:/data
+    command: ["watch", "--interval-hours", "${STATS19_CHECK_INTERVAL_HOURS:-24}"]
+
+  api:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      args: *version
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      # The read-only role once STATS19_API_DB_USER/PASSWORD are set (PLAN-006 C4); until
+      # then the owner role, as before.
+      STATS19_DATABASE_URL: postgresql://${STATS19_API_DB_USER:-${POSTGRES_USER:-stats19}}:${STATS19_API_DB_PASSWORD:-${POSTGRES_PASSWORD}}@db:5432/${POSTGRES_DB:-stats19}
+      # PDF reports: headless Chromium loads the web app's /print pages via Caddy
+      STATS19_REPORT_BASE_URL: http://web
+      # Cloudflare Access (PLAN-006): tunnel requests need a valid Access JWT
+      STATS19_ACCESS_TEAM_DOMAIN: ${STATS19_ACCESS_TEAM_DOMAIN:-}
+      STATS19_ACCESS_AUD: ${STATS19_ACCESS_AUD:-}
+    shm_size: 512m # Chromium needs more shared memory than Docker's 64 MB default
+    command: ["serve", "--host", "0.0.0.0", "--port", "8000"]
+    ports:
+      # Localhost-only by default (Caddy fronts it at :8080/api); API_BIND=0.0.0.0 for LAN.
+      - "${API_BIND:-127.0.0.1}:${API_PORT:-8000}:8000"
+
+  web:
+    build:
+      context: .
+      dockerfile: docker/web.Dockerfile
+      args: *version
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      - api
+    volumes:
+      # fetched with scripts/fetch_basemap.sh (~3 GB for GB)
+      - ${BASEMAP_DIR:-./data/basemap}:/srv/basemap:ro
+    ports:
+      - "${WEB_BIND:-127.0.0.1}:${WEB_PORT:-8080}:80"
+
+  # Remote access (PLAN-006): dials out to Cloudflare; no ports. Only with the "remote"
+  # profile (COMPOSE_PROFILES=remote on the BOSGAME), so it never starts on the Mac.
+  tunnel:
+    image: cloudflare/cloudflared:2026.10.0
+    profiles: ["remote"]
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      - web
+    environment:
+      TUNNEL_TOKEN: ${CLOUDFLARE_TUNNEL_TOKEN:-}  # from the Cloudflare dashboard; never commit it
+    command: ["tunnel", "--no-autoupdate", "run"]
+
+  backup:
+    image: imresamu/postgis:17-3.5
+    restart: unless-stopped
+    logging: *logging
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PGHOST: db
+      PGUSER: ${POSTGRES_USER:-stats19}
+      PGPASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-stats19}
+      BACKUP_INTERVAL_HOURS: ${BACKUP_INTERVAL_HOURS:-168}
+      BACKUP_KEEP: ${BACKUP_KEEP:-4}
+      # saved schemes (schema app), daily, into BACKUP_DIR/app (PLAN-011 §6)
+      APP_BACKUP_INTERVAL_HOURS: ${APP_BACKUP_INTERVAL_HOURS:-24}
+      APP_BACKUP_KEEP: ${APP_BACKUP_KEEP:-30}
+    volumes:
+      - ./docker/backup.sh:/backup.sh:ro
+      - ${BACKUP_DIR:-./backups}:/backups
+    entrypoint: ["/bin/sh", "/backup.sh"]
+
+volumes:
+  pgdata:
+  downloads:

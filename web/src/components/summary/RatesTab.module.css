@@ -1,0 +1,242 @@
+/* Area → Rates (PLAN-009 §10): rate tiles, trend, similar authorities, traffic */
+
+.stale {
+  opacity: 0.55;
+  transition: opacity var(--duration) var(--ease-out);
+}
+
+.notice {
+  margin: var(--s4) 0;
+  padding: var(--s3);
+  background: var(--warn-wash);
+  color: var(--warn);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+}
+
+.intro {
+  margin: var(--s4) 0 0;
+  font-size: var(--text-sm);
+  line-height: 1.45;
+  color: var(--ink-2);
+}
+
+.group {
+  margin-top: var(--s4);
+}
+
+.groupTitle {
+  margin: 0;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(168px, 1fr));
+  gap: 1px;
+  margin: var(--s2) 0 0;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.tile {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: var(--s2) var(--s3) var(--s3);
+  background: var(--paper-raised);
+}
+
+.tile dt {
+  display: flex;
+  flex-direction: column;
+}
+
+.tile dd {
+  margin: 0;
+}
+
+.tileLabel {
+  font-size: var(--text-sm);
+  font-weight: 600;
+}
+
+.tileUnit {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.tileValue {
+  margin-top: var(--s1) !important;
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 500;
+  line-height: 1.1;
+}
+
+.tileMeta {
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+  font-variant-numeric: tabular-nums;
+}
+
+.versus {
+  margin-top: var(--s1) !important;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.versus[data-band='highest'] {
+  color: var(--ink);
+  font-weight: 600;
+}
+
+.rateSelect {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--air);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.rateSelect select {
+  max-width: 100%;
+  min-height: 30px;
+  padding: 0 var(--s2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink);
+  font: inherit;
+}
+
+.peers {
+  margin-top: var(--s5);
+}
+
+.note {
+  margin: var(--s1) 0 var(--s2);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th,
+.table td {
+  padding: 5px 6px 5px 0;
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  font-weight: 400;
+}
+
+.table thead th {
+  font-size: var(--text-xs);
+  font-weight: 500;
+  color: var(--ink-3);
+  border-bottom-color: var(--rule-strong);
+}
+
+.num {
+  text-align: right !important;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.rank {
+  display: inline-block;
+  min-width: 1.75em;
+  color: var(--ink-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+}
+
+.selfRow th,
+.selfRow td {
+  background: var(--accent-wash);
+  font-weight: 600;
+}
+
+.link {
+  padding: 0;
+  border: none;
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  text-align: left;
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 2px;
+  cursor: pointer;
+}
+
+.link:hover {
+  text-decoration-color: var(--accent);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.notes {
+  margin-top: var(--air);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--rule);
+}
+
+.notes ul {
+  margin: var(--s2) 0 0;
+  padding-left: var(--s4);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+  color: var(--ink-2);
+}
+
+.introRow {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--s3);
+}
+
+.introRow .intro {
+  flex: 1;
+}
+
+.pdf {
+  flex: none;
+  height: 30px;
+  margin-top: var(--s4);
+  padding: 0 var(--s3);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: none;
+  color: var(--ink);
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.pdf:hover {
+  background: var(--paper-sunk);
+}
+
+.pdf:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}

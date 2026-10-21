@@ -1,0 +1,411 @@
+.loading {
+  padding: 40px;
+  color: var(--ink-3);
+}
+
+.report {
+  /* the page box (A4 portrait / landscape minus margins) sets the width */
+  width: 100%;
+  color: var(--ink);
+  font-size: 10pt;
+  line-height: 1.4;
+}
+
+.cover {
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--ink);
+}
+
+.eyebrow {
+  margin: 0;
+  font-size: 8pt;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.title {
+  margin: 4px 0 2px;
+  font-size: 22pt;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+
+.metaLine {
+  margin: 0;
+  color: var(--ink-2);
+  font-size: 9pt;
+}
+
+.h2 {
+  margin: 14px 0 6px;
+  font-size: 12pt;
+  font-weight: 600;
+}
+
+.selection ul {
+  margin: 0;
+  padding-left: 16px;
+}
+
+.notes {
+  margin-top: 8px;
+  padding: 8px 10px;
+  border-left: 3px solid var(--accent);
+  background: var(--paper);
+}
+
+.notes h3 {
+  margin: 0 0 2px;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.notes p {
+  margin: 0;
+  white-space: pre-wrap;
+}
+
+.mapFigure {
+  margin: 12px 0 0;
+  border: 1px solid var(--rule-strong);
+}
+
+.mapFigure figcaption {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 4px 8px;
+  font-size: 8pt;
+  color: var(--ink-2);
+  border-top: 1px solid var(--rule);
+}
+
+.mapFigure figcaption i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  vertical-align: middle;
+}
+
+.attrib {
+  margin-left: auto;
+  color: var(--ink-3);
+}
+
+.tiles {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  margin: 12px 0 0;
+  border: 1px solid var(--rule);
+}
+
+.tiles div {
+  padding: 6px 8px;
+  border-right: 1px solid var(--rule);
+}
+
+.tiles div:last-child {
+  border-right: none;
+}
+
+.tiles dt {
+  font-size: 7.5pt;
+  color: var(--ink-3);
+}
+
+.tiles dd {
+  margin: 0;
+  font-size: 15pt;
+  font-weight: 600;
+}
+
+.pageBreak {
+  break-before: page;
+}
+
+.grid2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 18px;
+}
+
+.grid2 > * {
+  break-inside: avoid;
+}
+
+/* tighter chart rhythm on paper (leave headroom for font-metric differences
+   between the Mac and the Linux renderer in Docker) */
+.grid2 > section {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.grid2 ul {
+  gap: 1px;
+  margin-top: 6px;
+}
+
+.grid2 li {
+  font-size: 8pt;
+}
+
+.grid2 h3 {
+  font-size: 9.5pt;
+}
+
+/* stick diagram pages are landscape */
+.landscape {
+  page: landscape;
+  break-before: page;
+}
+
+.sticks > div > svg {
+  break-inside: avoid;
+}
+
+.keyBlock {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px solid var(--rule);
+  break-inside: avoid;
+}
+
+.listSection {
+  break-before: page;
+}
+
+.list {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 7.5pt;
+}
+
+.list th {
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 1px solid var(--ink);
+  padding: 2px 4px 2px 0;
+}
+
+.list td {
+  padding: 2px 4px 2px 0;
+  border-bottom: 1px solid var(--rule);
+  vertical-align: top;
+}
+
+.list tr {
+  break-inside: avoid;
+}
+
+.mono {
+  font-family: var(--font-mono);
+}
+
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin-right: 4px;
+  border-radius: 50%;
+}
+
+.about {
+  break-inside: avoid;
+}
+
+.about ul {
+  margin: 0 0 8px;
+  padding-left: 16px;
+}
+
+.small {
+  font-size: 8pt;
+  color: var(--ink-2);
+}
+
+.recordGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.recordCard {
+  border: 1px solid var(--rule);
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+/* ---------------------------------------------------------------- site pack */
+.method {
+  margin-top: 10px;
+  padding: 8px 10px;
+  border: 1px solid var(--rule-strong);
+}
+
+.method h3 {
+  margin: 0 0 4px;
+  font-size: 9pt;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ink-2);
+}
+
+.method dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px 12px;
+  margin: 0;
+}
+
+.method dt {
+  font-size: 7.5pt;
+  color: var(--ink-3);
+}
+
+.method dd {
+  margin: 0;
+  font-size: 9pt;
+  font-weight: 500;
+}
+
+.rankedSection {
+  break-before: page;
+}
+
+.rankedSection td svg {
+  vertical-align: middle;
+}
+
+.siteSection {
+  break-before: page;
+}
+
+.siteH {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0 0 2px;
+  font-size: 15pt;
+  font-weight: 600;
+  line-height: 1.2;
+}
+
+.siteRank {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #fff;
+  font-size: 11pt;
+}
+
+.siteGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  align-items: start;
+}
+
+.siteGrid > div > section {
+  padding-top: 0;
+}
+
+.siteTiles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 12px 0 6px;
+  border: 1px solid var(--rule);
+}
+
+.siteTiles div {
+  padding: 4px 8px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+
+.siteTiles div:nth-child(3n) {
+  border-right: none;
+}
+
+.siteTiles div:nth-last-child(-n + 3) {
+  border-bottom: none;
+}
+
+.siteTiles dt {
+  font-size: 7.5pt;
+  color: var(--ink-3);
+}
+
+.siteTiles dd {
+  margin: 0;
+  font-size: 14pt;
+  font-weight: 600;
+}
+
+.h3 {
+  margin: 10px 0 4px;
+  font-size: 10.5pt;
+  font-weight: 600;
+}
+
+/* sticks start their own page: each site is a map/figures page + a sticks page */
+.siteSticks {
+  break-before: page;
+}
+
+/* severity share in the top right of a figure tile */
+.tileShare {
+  float: right;
+  color: var(--ink-3);
+}
+
+/* site pack: key and caveats share one final page */
+.endPage {
+  break-before: page;
+  break-inside: avoid;
+}
+
+.endPage .keyBlock {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.endPage ul {
+  margin: 0 0 6px;
+  padding-left: 16px;
+  font-size: 8.5pt;
+}
+
+/* site reports (junction, road): sections flow on from one page to the next, with each
+   heading kept with what follows */
+.block {
+  margin-top: 14px;
+}
+
+.block h2 {
+  margin-bottom: 6px;
+  break-after: avoid;
+}
+
+/* numeric table columns (rates pages) */
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+.gap {
+  padding-left: 12px !important;
+}

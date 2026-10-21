@@ -1,0 +1,255 @@
+/* Routes (PLAN-009 V2): the ranked list reuses the safety list; the corridor adds a strip
+   chart whose colours are the risk layer's bands, so map and chart read as one. */
+
+.back {
+  margin-top: var(--s2);
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--accent);
+  cursor: pointer;
+}
+
+.back:hover,
+.back:focus-visible {
+  text-decoration: underline;
+}
+
+/* The corridor's back link, with "Save as scheme" on the right. */
+.headRow {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+
+.first {
+  margin-top: var(--s4);
+}
+
+.road {
+  margin: var(--s4) 0 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* ------------------------------------------------------------ strip chart */
+
+.strip {
+  position: relative;
+  margin: var(--s4) 0 var(--s2);
+}
+
+.strip svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.rowLabel {
+  font-size: 9.5px;
+  fill: var(--ink-3);
+  letter-spacing: 0.02em;
+}
+
+.band {
+  transition: opacity var(--duration-fast) var(--ease-out);
+}
+
+.rateBar {
+  fill: var(--ink-2);
+}
+
+/* flows wear the traffic layer's colour */
+.flowBar {
+  fill: var(--traffic);
+  opacity: 0.75;
+}
+
+.link[data-on] .rateBar,
+.link[data-on] .flowBar {
+  fill: var(--accent);
+  opacity: 1;
+}
+
+.link[data-on] .band {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.hit {
+  fill: transparent;
+  cursor: pointer;
+  outline: none;
+}
+
+.hit:focus-visible {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.baseline {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+}
+
+.gap rect {
+  fill: var(--paper-raised);
+}
+
+.gap path {
+  fill: none;
+  stroke: var(--rule-strong);
+  stroke-width: 1.5;
+}
+
+/* a paper ring keeps neighbouring junction dots apart */
+.junction {
+  stroke: var(--paper-raised);
+  stroke-width: 1.5;
+  cursor: pointer;
+  outline: none;
+  transition: r var(--duration-fast) var(--ease-out);
+}
+
+.junction[data-on],
+.junction:focus-visible {
+  stroke: var(--ink);
+}
+
+.axis text {
+  font-size: 9.5px;
+  fill: var(--ink-3);
+}
+
+.tip {
+  position: absolute;
+  bottom: calc(100% - 4px);
+  transform: translateX(-50%);
+  display: grid;
+  gap: 2px;
+  width: max-content;
+  max-width: min(300px, 90vw);
+  padding: var(--s2) var(--s3);
+  background: var(--ink);
+  color: var(--ink-inverse);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-float);
+  font-size: var(--text-xs);
+  line-height: 1.4;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.tip strong {
+  font-size: var(--text-sm);
+}
+
+/* ------------------------------------------------------------ keys and lists */
+
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s3);
+  margin: 0 0 var(--s2);
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.key li {
+  display: inline-flex;
+  align-items: center;
+}
+
+.swatch {
+  display: inline-block;
+  flex: none;
+  width: 10px;
+  height: 10px;
+  margin-right: 6px;
+  border-radius: 2px;
+  vertical-align: -1px;
+}
+
+.gapRow {
+  margin: 0;
+  padding: 3px var(--s1);
+  border-bottom: 1px dashed var(--rule-strong);
+  font-size: var(--text-xs);
+  font-style: italic;
+  color: var(--ink-3);
+}
+
+/* ------------------------------------------------------------ list controls */
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--s2);
+}
+
+.finder {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--s1);
+}
+
+.finderLabel {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-caps);
+}
+
+.finder input {
+  width: 7.5em;
+  padding: 4px var(--s2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+  color: var(--ink);
+}
+
+.finder input:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.finder input[aria-invalid] {
+  border-color: var(--warn);
+}
+
+.finder button {
+  padding: 4px var(--s3);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: var(--ink);
+  color: var(--ink-inverse);
+  font: inherit;
+  font-size: var(--text-sm);
+  cursor: pointer;
+}
+
+.finder button:hover,
+.finder button:focus-visible {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+.finderError {
+  flex-basis: 100%;
+  font-size: var(--text-xs);
+  color: var(--warn);
+}

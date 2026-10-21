@@ -1,0 +1,284 @@
+.card {
+  padding: var(--s4) 0;
+  border-top: 1px solid var(--rule);
+}
+
+.cardHead {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--s2);
+}
+
+.title {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.subtitle {
+  margin: 2px 0 0;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.tableToggle {
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  background: none;
+  padding: 1px 8px;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+  cursor: pointer;
+}
+
+.tableToggle:hover,
+.tableToggle[aria-pressed='true'] {
+  border-color: var(--ink-3);
+  color: var(--ink);
+}
+
+.legend {
+  margin-top: var(--s2);
+}
+
+.key {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s3);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.key li {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.plot {
+  position: relative;
+  margin-top: var(--s2);
+}
+
+.svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.grid {
+  stroke: var(--rule);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.axis {
+  fill: var(--ink-3);
+  font-size: 10px;
+  font-family: var(--font-mono);
+}
+
+.hit {
+  outline: none;
+  cursor: default;
+}
+
+.hit:hover path,
+.hit:hover rect:not(:first-child),
+.hit:focus-visible path,
+.hit:focus-visible rect:not(:first-child) {
+  filter: brightness(1.12);
+}
+
+.hit:focus-visible rect:first-child {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+.cell {
+  outline: none;
+  cursor: default;
+}
+
+.cell:hover,
+.cell:focus-visible {
+  stroke: var(--ink);
+  stroke-width: 1.5;
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 5;
+  transform: translate(-50%, calc(-100% - 8px));
+  display: grid;
+  gap: 2px;
+  min-width: 120px;
+  padding: 6px 9px;
+  background: var(--ink);
+  color: var(--ink-inverse);
+  border-radius: var(--radius);
+  font-size: var(--text-xs);
+  pointer-events: none;
+  white-space: nowrap;
+  box-shadow: var(--shadow-float);
+}
+
+.tooltip strong {
+  font-size: var(--text-sm);
+}
+
+.tipRow {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0.9;
+}
+
+.tipKey {
+  width: 10px;
+  height: 2px;
+}
+
+/* horizontal bars */
+.bars {
+  display: grid;
+  gap: 6px;
+  margin: var(--s3) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.barRow {
+  display: grid;
+  grid-template-columns: minmax(0, 38%) 1fr auto;
+  align-items: center;
+  gap: var(--s2);
+  font-size: var(--text-sm);
+}
+
+.barLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: var(--ink-2);
+}
+
+.barTrack {
+  height: 10px;
+}
+
+.bar {
+  display: block;
+  height: 100%;
+  min-width: 2px;
+  background: var(--ink-2);
+  border-radius: 0 4px 4px 0;
+}
+
+.barValue {
+  font-variant-numeric: tabular-nums;
+  min-width: 5.5em;
+  text-align: right;
+}
+
+.muted {
+  color: var(--ink-3);
+  font-size: var(--text-xs);
+}
+
+.empty {
+  margin: var(--s2) 0 0;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+
+/* table view */
+.tableWrap {
+  margin-top: var(--s2);
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-xs);
+}
+
+.table th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--ink-3);
+  border-bottom: 1px solid var(--rule-strong);
+  padding: 2px 6px 4px 0;
+}
+
+.table td {
+  padding: 3px 6px 3px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.num {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+
+/* rate trend: the authority in the accent, context in grey (PLAN-009 §10) */
+.selfLine {
+  fill: none;
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-linejoin: round;
+}
+
+.selfDot {
+  fill: var(--accent);
+  stroke: var(--paper-raised);
+  stroke-width: 2;
+}
+
+.peerLine {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+}
+
+.peerBand {
+  fill: var(--paper-sunk);
+}
+
+.gbLine {
+  fill: none;
+  stroke: var(--ink-3);
+  stroke-width: 2;
+  stroke-dasharray: 4 3;
+}
+
+.lineLabel,
+.lineLabelSelf {
+  font-size: 10px;
+  fill: var(--ink-2);
+}
+
+.lineLabelSelf {
+  fill: var(--ink);
+  font-weight: 600;
+}
+
+/* a possible recording gap: hollow, left out of the rates */
+.selfDotGap {
+  fill: var(--paper-raised);
+  stroke: var(--accent);
+  stroke-width: 2;
+  stroke-dasharray: 2 2;
+}

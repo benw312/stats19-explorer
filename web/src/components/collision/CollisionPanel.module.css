@@ -1,0 +1,242 @@
+.panel {
+  height: 100%;
+  overflow-y: auto;
+  background: var(--paper-raised);
+  border-left: 1px solid var(--rule-strong);
+  animation: slide-in var(--duration) var(--ease-out);
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(16px);
+    opacity: 0;
+  }
+}
+
+.head {
+  position: sticky;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--s3) var(--s4);
+  background: var(--paper-raised);
+  border-bottom: 1px solid var(--rule);
+}
+
+.head p {
+  margin: 0;
+}
+
+.close {
+  width: 28px;
+  height: 28px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  background: none;
+  font-size: 20px;
+  line-height: 1;
+  cursor: pointer;
+  color: var(--ink-2);
+}
+
+.close:hover {
+  border-color: var(--rule-strong);
+  color: var(--ink);
+}
+
+.state {
+  padding: var(--s4);
+  color: var(--ink-2);
+}
+
+.body {
+  padding: 0 var(--s4) var(--air);
+}
+
+.title {
+  padding: var(--s4) 0 var(--s3);
+  border-bottom: 2px solid var(--ink);
+}
+
+.sev {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: var(--radius);
+  color: #fff;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+}
+
+.when {
+  margin: var(--s2) 0 2px;
+  font-size: var(--text-xl);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.where {
+  margin: 0;
+  color: var(--ink-2);
+}
+
+.ref {
+  margin: var(--s2) 0 0;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+/* two-column fact grid with hairline rules */
+.facts {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin: 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fact {
+  padding: var(--s2) var(--s2) var(--s2) 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.fact:nth-last-child(-n + 2) {
+  border-bottom: none;
+}
+
+.fact dt {
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.fact dd {
+  margin: 1px 0 0;
+  font-size: var(--text-sm);
+}
+
+.sub {
+  display: flex;
+  align-items: baseline;
+  gap: var(--s2);
+  margin: var(--s5) 0 var(--s2);
+  font-size: var(--text-base);
+  font-weight: 600;
+}
+
+.n {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  font-weight: 400;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.table th {
+  text-align: left;
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-caps);
+  text-transform: uppercase;
+  color: var(--ink-3);
+  padding: 0 var(--s2) 4px 0;
+  border-bottom: 1px solid var(--rule-strong);
+}
+
+.table td {
+  vertical-align: top;
+  padding: 6px var(--s2) 6px 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+.table td:first-child {
+  width: 1.5em;
+  color: var(--ink-3);
+}
+
+.muted {
+  color: var(--ink-3);
+}
+
+.flag {
+  display: inline-block;
+  margin-left: 6px;
+  padding: 0 5px;
+  border-radius: var(--radius);
+  background: var(--warn-wash);
+  color: var(--warn);
+  font-size: var(--text-xs);
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 6px;
+  border-radius: 50%;
+}
+
+.external {
+  margin: var(--s5) 0 0;
+}
+
+.foot {
+  display: flex;
+  justify-content: space-between;
+  margin-top: var(--s5);
+  padding-top: var(--s2);
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.back {
+  border: none;
+  background: none;
+  padding: 0;
+  color: var(--accent);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.reportBar {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  padding: var(--s3) var(--s4) 0;
+}
+
+.reportButton {
+  height: 28px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
+  background: none;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.reportButton:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.reportButton:disabled {
+  cursor: progress;
+  opacity: 0.7;
+}
+
+.reportError {
+  font-size: var(--text-xs);
+  color: var(--warn);
+}

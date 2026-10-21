@@ -1,0 +1,229 @@
+/* Feedback dialog (FU-055): one quick form, reachable from the header and the crash screen. */
+
+.dialog {
+  width: min(520px, 92vw);
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: var(--s5);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  color: var(--ink);
+  box-shadow: var(--shadow-float);
+}
+
+.dialog::backdrop {
+  background: rgb(28 33 38 / 0.35);
+}
+
+.title {
+  margin: 0 0 var(--s1);
+  font-size: var(--text-lg);
+}
+
+.muted {
+  margin: 0;
+  font-size: var(--text-sm);
+  color: var(--ink-3);
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* The kind as a segmented choice: real radios, so arrow keys move between them. */
+.kinds {
+  display: flex;
+  flex-wrap: wrap;
+  margin: var(--s4) 0 0;
+  padding: 0;
+  border: none;
+}
+
+.kind {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.kind input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+.kind span {
+  display: block;
+  padding: 6px var(--s3);
+  border: 1px solid var(--rule-strong);
+  margin-left: -1px;
+  background: var(--paper);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+  text-align: center;
+  white-space: nowrap;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.kind:first-child span {
+  margin-left: 0;
+  border-radius: var(--radius) 0 0 var(--radius);
+}
+
+.kind:last-child span {
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.kind input:hover + span {
+  background: var(--paper-sunk);
+}
+
+.kind input:checked + span {
+  position: relative;
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.kind input:focus-visible + span {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  z-index: 1;
+}
+
+.field {
+  display: block;
+  margin-top: var(--s4);
+  font-size: var(--text-sm);
+  font-weight: 500;
+}
+
+.message {
+  display: block;
+  width: 100%;
+  margin-top: var(--s1);
+  padding: var(--s2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  font: inherit;
+  color: var(--ink);
+  resize: vertical;
+}
+
+.message[aria-invalid='true'] {
+  border-color: var(--warn);
+}
+
+.hint {
+  margin: var(--s1) 0 0;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.problem {
+  color: var(--warn);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: var(--s2);
+  margin-top: var(--s3);
+  font-size: var(--text-sm);
+}
+
+.context {
+  margin-top: var(--s3);
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.context summary {
+  cursor: pointer;
+  color: var(--ink-3);
+}
+
+.context dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 2px var(--s3);
+  margin: var(--s2) 0 0;
+}
+
+.context dt {
+  color: var(--ink-3);
+}
+
+.context dd {
+  margin: 0;
+  overflow-wrap: anywhere;
+}
+
+.notice {
+  margin: var(--s3) 0 0;
+  padding: var(--s2) var(--s3);
+  border-radius: var(--radius);
+  background: var(--warn-wash);
+  color: var(--warn);
+  font-size: var(--text-sm);
+}
+
+.actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--s2);
+  margin-top: var(--s4);
+}
+
+.primary,
+.secondary {
+  height: 34px;
+  padding: 0 var(--s4);
+  border-radius: var(--radius);
+  font: inherit;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.primary {
+  border: 1px solid var(--ink);
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.primary:hover:not(:disabled) {
+  border-color: var(--accent);
+  background: var(--accent);
+}
+
+.primary:disabled {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.secondary {
+  border: 1px solid var(--rule-strong);
+  background: none;
+  color: var(--ink);
+}
+
+@media (max-width: 420px) {
+  .kind {
+    flex-basis: 50%;
+  }
+
+  .kind span,
+  .kind:first-child span,
+  .kind:last-child span {
+    margin: 0 0 -1px;
+    border-radius: 0;
+  }
+}

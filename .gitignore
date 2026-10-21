@@ -1,0 +1,32 @@
+# Data (downloads, raw CSVs) and database dumps
+/data/
+/backups/
+
+# Secrets
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Backups and logs
+*.log
+*.tmp
+*.bak
+
+# OS
+.DS_Store
+
+# Frontend
+web/node_modules/
+web/dist/
+web/public/basemap
+
+# Playwright
+web/test-results/
+web/playwright-report/

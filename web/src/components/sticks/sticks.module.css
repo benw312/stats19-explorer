@@ -1,0 +1,160 @@
+/* block flow (not grid): Chromium fragments grid poorly when printing, pushing
+   every band onto its own page */
+.diagram > svg + svg {
+  margin-top: var(--s4);
+}
+
+.band {
+  display: block;
+  overflow: visible;
+  font-family: var(--font-sans);
+}
+
+.rule {
+  stroke: var(--rule);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.section {
+  stroke: var(--rule-strong);
+  stroke-width: 1;
+  shape-rendering: crispEdges;
+}
+
+.rowLabel {
+  font-size: 9.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  fill: var(--ink-3);
+}
+
+.mono {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  fill: var(--ink);
+}
+
+.small {
+  font-size: 9.5px;
+  fill: var(--ink-2);
+}
+
+.sevLetter {
+  font-size: 10px;
+  font-weight: 700;
+  fill: #fff;
+}
+
+.flag {
+  font-size: 8.5px;
+  font-weight: 700;
+  fill: var(--warn);
+}
+
+.footprint {
+  fill: none;
+  stroke: var(--rule);
+  stroke-width: 1;
+}
+
+.impact {
+  stroke: var(--ink);
+  stroke-width: 3;
+  stroke-linecap: round;
+}
+
+.stickBg {
+  fill: transparent;
+}
+
+.stick {
+  cursor: pointer;
+  outline: none;
+}
+
+.stick:hover .stickBg,
+.stick:focus-visible .stickBg {
+  fill: var(--accent-wash);
+}
+
+.stick:focus-visible .stickBg {
+  stroke: var(--accent);
+  stroke-width: 1.5;
+}
+
+/* key */
+.key {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+  gap: var(--s3) var(--s4);
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.key h4 {
+  margin: 0 0 4px;
+  font-size: var(--text-xs);
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.key ul {
+  display: grid;
+  gap: 2px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.key li {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.keyNote {
+  margin: 6px 0 0;
+  line-height: 1.4;
+}
+
+/* totals chips */
+.totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.totals li {
+  padding: 3px 8px;
+  border: 1px solid var(--rule);
+  border-radius: var(--radius);
+  font-size: var(--text-sm);
+  background: var(--paper-raised);
+}
+
+.totals li strong {
+  font-feature-settings: 'tnum' 0;
+}
+
+.totals .of {
+  color: var(--ink-3);
+}
+
+/* print: the key's long lists (manoeuvres) in two columns, so the key and the
+   caveats share one page (FU-023) */
+@media print {
+  .key ul {
+    display: block;
+    columns: 2;
+    column-gap: 12px;
+  }
+
+  .key li {
+    break-inside: avoid;
+    margin-bottom: 2px;
+  }
+}

@@ -1,0 +1,334 @@
+.shell {
+  display: grid;
+  height: 100%;
+  grid-template-rows: var(--header-h) 1fr;
+  grid-template-columns: var(--sheet-w) 1fr 0;
+  grid-template-areas:
+    'header header header'
+    'sheet map panel';
+}
+
+.shell[data-panel='open'] {
+  grid-template-columns: var(--sheet-w) 1fr var(--panel-w);
+}
+
+.shell[data-sheet='closed'] {
+  grid-template-columns: 0 1fr 0;
+}
+
+.shell[data-sheet='closed'][data-panel='open'] {
+  grid-template-columns: 0 1fr var(--panel-w);
+}
+
+/* wide summary panel (stick diagrams need room) */
+.shell[data-wide='yes'] {
+  --panel-w: min(1100px, 68vw);
+}
+
+/* site pages: room for the section index and figures, with the map still in view */
+.shell[data-wide='site'] {
+  --panel-w: min(820px, 58vw);
+}
+
+.header {
+  grid-area: header;
+  display: flex;
+  align-items: center;
+  gap: var(--s4);
+  padding: 0 var(--s4);
+  background: var(--paper);
+  border-bottom: 1px solid var(--rule-strong);
+  position: relative;
+  z-index: 10;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: calc(var(--sheet-w) - var(--s4) * 2);
+  flex: none;
+}
+
+/* survey mark: a small target/benchmark glyph */
+.mark {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
+  background:
+    linear-gradient(var(--ink), var(--ink)) center / 2px 100% no-repeat,
+    linear-gradient(var(--ink), var(--ink)) center / 100% 2px no-repeat;
+}
+
+.name {
+  margin: 0;
+  font-size: var(--text-base);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.name span {
+  font-weight: 400;
+  color: var(--ink-2);
+}
+
+/* shows and hides the filter sheet: on desktop for more map, on phones it's the only way in */
+.sheetToggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  flex: none;
+  height: 32px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper-raised);
+  font: inherit;
+  font-size: var(--text-sm);
+  color: var(--ink);
+  cursor: pointer;
+  transition:
+    background var(--duration-fast) var(--ease-out),
+    border-color var(--duration-fast) var(--ease-out);
+}
+
+.sheetToggle:hover {
+  border-color: var(--ink);
+}
+
+.sheetToggle:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.sheetToggle[aria-expanded='true'] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--ink-inverse);
+}
+
+/* active filters, so a folded-away sheet doesn't hide that the map is filtered */
+.toggleCount {
+  min-width: 18px;
+  padding: 0 5px;
+  border-radius: 999px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  line-height: 18px;
+  text-align: center;
+}
+
+/* the top-level views: one joined control, so it reads as navigation, not three actions */
+.views {
+  display: flex;
+  flex: none;
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.viewTab {
+  white-space: nowrap;
+  height: 30px;
+  padding: 0 var(--s3);
+  border: none;
+  background: var(--paper-raised);
+  font: inherit;
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-out);
+}
+
+.viewTab + .viewTab {
+  border-left: 1px solid var(--rule-strong);
+}
+
+.viewTab:hover {
+  background: var(--paper-sunk);
+  color: var(--ink);
+}
+
+.viewTab:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.viewTab[aria-pressed='true'] {
+  background: var(--ink);
+  color: var(--ink-inverse);
+}
+
+.coverage {
+  margin: 0 0 0 auto;
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  white-space: nowrap;
+}
+
+/* Always in the header, so a pilot user can say something from any screen (FU-055). */
+.feedback {
+  flex: none;
+  height: 32px;
+  padding: 0 var(--s3);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: none;
+  font: inherit;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--ink-2);
+  cursor: pointer;
+  transition:
+    border-color var(--duration-fast) var(--ease-out),
+    color var(--duration-fast) var(--ease-out);
+}
+
+.feedback:hover {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.feedback:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+.aboutLink {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--rule-strong);
+  text-underline-offset: 2px;
+}
+
+.aboutLink:hover {
+  text-decoration-color: var(--accent);
+}
+
+.aboutLink:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+.sheet {
+  grid-area: sheet;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.map {
+  grid-area: map;
+  position: relative;
+  min-width: 0;
+  overflow: hidden; /* keep map overlays (draw tools, legend) inside the map */
+}
+
+.mapLoading {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-content: center;
+  margin: 0;
+  color: var(--ink-3);
+  font-size: var(--text-sm);
+}
+
+.panel {
+  grid-area: panel;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.fatal {
+  display: grid;
+  place-content: center;
+  height: 100%;
+  text-align: center;
+  color: var(--ink-2);
+}
+
+@media (max-width: 1100px) {
+  .coverage {
+    display: none;
+  }
+
+  .feedback {
+    margin-left: auto;
+  }
+}
+
+/* narrow screens: sheet and panel overlay the map instead of squeezing it */
+@media (max-width: 900px) {
+  .shell,
+  .shell[data-panel='open'],
+  .shell[data-sheet='closed'],
+  .shell[data-sheet='closed'][data-panel='open'] {
+    grid-template-columns: 0 1fr 0;
+  }
+
+  .brand {
+    width: auto;
+  }
+
+  .name span {
+    display: none;
+  }
+
+  .sheet,
+  .panel {
+    position: fixed;
+    top: var(--header-h);
+    bottom: 0;
+    z-index: 5;
+    width: min(92vw, var(--panel-w));
+    box-shadow: var(--shadow-float);
+  }
+
+  .sheet {
+    left: 0;
+  }
+
+  .shell[data-sheet='closed'] .sheet {
+    display: none;
+  }
+
+  .panel {
+    right: 0;
+  }
+}
+
+/* phones: the views get their own row under search, so neither is squeezed */
+@media (max-width: 560px) {
+  :root {
+    --header-h: 92px;
+  }
+
+  .header {
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 6px var(--s2);
+    padding: 0 var(--s2);
+  }
+
+  .views {
+    order: 10;
+    flex: 1 0 100%;
+  }
+
+  .viewTab {
+    flex: 1;
+  }
+
+  .name {
+    display: none;
+  }
+
+  .viewTab,
+  .sheetToggle,
+  .feedback {
+    padding: 0 var(--s2);
+  }
+}

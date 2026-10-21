@@ -1,0 +1,147 @@
+/* Junction card: shares the traffic panel's sheet (traffic.module.css); a junction is a place,
+   so its hero is ink-ruled, with severity hues only on the severity dots. */
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1);
+  margin: var(--s2) 0 0 !important;
+}
+
+.chip {
+  padding: 1px var(--s2);
+  border: 1px solid var(--rule-strong);
+  border-radius: var(--radius);
+  background: var(--paper);
+  font-size: var(--text-xs);
+  color: var(--ink-2);
+}
+
+.hero {
+  margin-bottom: var(--s5);
+  padding: var(--s3) var(--s4);
+  border-left: 3px solid var(--ink);
+  background: var(--paper);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.hero p {
+  margin: 0;
+}
+
+.heroValue {
+  font-family: var(--font-mono);
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+}
+
+.heroUnit {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+  letter-spacing: 0;
+}
+
+.heroCaption {
+  margin-top: 2px !important;
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  line-height: 1.4;
+}
+
+.severities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--s1) var(--s4);
+  margin: var(--s3) 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--text-sm);
+}
+
+.severities li {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+}
+
+.sevDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.rate {
+  margin-top: var(--s3);
+  padding-top: var(--s3);
+  border-top: 1px solid var(--rule);
+}
+
+.rateValue {
+  font-family: var(--font-mono);
+  font-size: var(--text-xl);
+  line-height: 1.2;
+}
+
+.rateNone {
+  margin-top: var(--s3) !important;
+  padding-top: var(--s3);
+  border-top: 1px solid var(--rule);
+  font-size: var(--text-sm);
+  color: var(--ink-2);
+}
+
+.arms {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--text-sm);
+}
+
+.arms th,
+.arms td {
+  padding: var(--s2) var(--s1);
+  border-bottom: 1px solid var(--rule);
+  text-align: left;
+  font-weight: 400;
+}
+
+.arms thead th {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+  border-bottom-color: var(--rule-strong);
+}
+
+.arms .num {
+  text-align: right;
+  font-family: var(--font-mono);
+}
+
+.major {
+  font-weight: 600;
+}
+
+.role {
+  font-size: var(--text-xs);
+  color: var(--ink-3);
+}
+
+.cpLink {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--s1);
+  padding: 0;
+  border: none;
+  background: none;
+  font: inherit;
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--traffic);
+  text-underline-offset: 3px;
+  cursor: pointer;
+}
+
+.cpLink:hover,
+.cpLink:focus-visible {
+  color: var(--traffic);
+}

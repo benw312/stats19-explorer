@@ -1,0 +1,10 @@
+.git
+.venv
+data
+backups
+web/node_modules
+web/dist
+web/public/basemap
+**/__pycache__
+.pytest_cache
+.ruff_cache
