@@ -184,6 +184,10 @@ legacy/                 the original hand-run SQL this project grew from
 
 Each major phase started with a written plan in [`docs/plans`](docs/plans): the problem, the options, the decisions and the reasons for them. Some examples: the [cluster-site method](docs/plans/PLAN-005-hotspot-sites.md), the [traffic and safety models](docs/plans/PLAN-008-traffic-flows.md), [remote access](docs/plans/PLAN-006-remote-access.md) and [schemes](docs/plans/PLAN-011-schemes.md). Open questions, known limits and rejected ideas are logged as numbered follow-ups in [docs/FOLLOWUPS.md](docs/FOLLOWUPS.md). For example, derived collision types were rejected because they would present guesses as recorded facts (FU-001).
 
+## Feedback
+
+Issues and suggestions are welcome. To report a security problem, please use the private route in [SECURITY.md](SECURITY.md) rather than a public issue.
+
 ## Data and licence
 
 The code is licensed under the [GNU Affero General Public License v3.0](LICENSE).
