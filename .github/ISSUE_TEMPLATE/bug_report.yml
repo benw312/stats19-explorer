@@ -1,0 +1,27 @@
+name: Bug report
+description: Something doesn't work or a figure looks wrong
+labels: [bug]
+body:
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened
+      description: What you did, what you expected, and what you saw instead.
+    validations:
+      required: true
+  - type: input
+    id: url
+    attributes:
+      label: Link or filter
+      description: The app's URL holds the whole selection (area, filters, view), so pasting it usually reproduces the problem.
+  - type: textarea
+    id: logs
+    attributes:
+      label: Error messages or logs
+      description: Browser console errors, API responses, or pipeline output.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: Version
+      description: About → "This copy of the app" shows the commit, or give the date you pulled the code.

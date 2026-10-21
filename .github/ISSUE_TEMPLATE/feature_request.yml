@@ -1,0 +1,21 @@
+name: Idea or feature request
+description: Suggest an analysis, view or improvement
+labels: [enhancement]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: The task or question behind the idea, for example "compare a junction before and after a scheme".
+    validations:
+      required: true
+  - type: textarea
+    id: idea
+    attributes:
+      label: What would help
+      description: How you'd like it to work. Mention any method or standard it should follow (DfT, COBALT, GG 119, …).
+  - type: textarea
+    id: data
+    attributes:
+      label: Data it needs
+      description: Is it in the open STATS19 data, or does it need another source?

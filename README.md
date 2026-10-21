@@ -4,6 +4,7 @@
 
 It pulls the Department for Transport's STATS19 data (9.1 million collisions, 1979–2025) into PostgreSQL + PostGIS by itself, checks every load, and joins it to the national road network, traffic counts and population. A React + MapLibre web app on top lets an engineer find dangerous junctions and roads, see what's different about them, and produce the stick diagrams and PDF site packs that UK road-safety work depends on.
 
+[![CI](https://github.com/benw312/stats19-explorer/actions/workflows/ci.yml/badge.svg)](https://github.com/benw312/stats19-explorer/actions/workflows/ci.yml)
 [![License: AGPL v3](https://img.shields.io/badge/license-AGPL--3.0-blue.svg)](LICENSE)
 ![Python 3.12](https://img.shields.io/badge/python-3.12-3776AB?logo=python&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/typescript-React%2019-3178C6?logo=typescript&logoColor=white)
@@ -23,7 +24,7 @@ It pulls the Department for Transport's STATS19 data (9.1 million collisions, 19
 | **Web app** | React 19 + TypeScript + MapLibre. Shareable URL state, accessible charts (each with a table view, keyboard-focusable marks and a colour-blind-safe palette), and CSV, Excel and GeoJSON exports. |
 | **Reports** | PDF area reports and site packs, rendered by headless Chromium from the app's own print pages, so screen and paper share one set of components. |
 | **Ops and security** | One Docker Compose stack on a home server. Remote access goes through a **Cloudflare Tunnel + Access** (nothing opened on the router). The API checks the Access JWT at the origin and connects as a read-only database role. Scheduled backups, plus busy limits on PDF and export work. |
-| **Testing** | 628 Python tests (unit, plus integration tests against a real PostGIS) and 156 Vitest tests. Linted with ruff, oxlint and Prettier. |
+| **Testing** | 628 Python tests (unit, plus integration tests against a real PostGIS; 94% coverage) and 156 Vitest tests, all run by GitHub Actions on every push, with the PDF renderer in headless Chromium. Linted with ruff, oxlint and Prettier. Dependencies are watched by Dependabot. |
 
 About 13.5k lines of Python and 15k lines of TypeScript, built since March 2025.
 
@@ -186,7 +187,7 @@ Each major phase started with a written plan in [`docs/plans`](docs/plans): the 
 
 ## Feedback
 
-Issues and suggestions are welcome. To report a security problem, please use the private route in [SECURITY.md](SECURITY.md) rather than a public issue.
+Issues and suggestions are welcome; see [CONTRIBUTING.md](CONTRIBUTING.md). To report a security problem, please use the private route in [SECURITY.md](SECURITY.md) rather than a public issue.
 
 ## Data and licence
 
