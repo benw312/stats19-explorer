@@ -11,7 +11,7 @@ It pulls the Department for Transport's STATS19 data (9.1 million collisions, 19
 ![PostGIS](https://img.shields.io/badge/PostgreSQL-PostGIS-336791?logo=postgresql&logoColor=white)
 ![Docker Compose](https://img.shields.io/badge/deploy-Docker%20Compose-2496ED?logo=docker&logoColor=white)
 
-![Area view: every collision in Bristol 2021–2025 on the map, with headline figures, a yearly trend and a day × hour matrix](docs/images/area-view.webp)
+![A short tour of the app in Bristol: zooming from the whole city down to single collisions, junctions ranked worse than similar ones, cluster sites, a junction page with its stick diagram, the A38 corridor and traffic counts](docs/images/tour.gif)
 
 ## Highlights
 
@@ -29,6 +29,10 @@ It pulls the Department for Transport's STATS19 data (9.1 million collisions, 19
 About 13.5k lines of Python and 15k lines of TypeScript, built since March 2025.
 
 ## Screenshots
+
+**Area.** Every collision in a chosen area on the map, with headline figures, the yearly trend, when collisions happen, and who was hurt.
+
+![Area view: every collision in Bristol 2021–2025 on the map, with headline figures, a yearly trend and a day × hour matrix](docs/images/area-view.webp)
 
 **Sites → worse than expected.** Junctions and roads ranked by excess collisions over similar sites with the same traffic (Empirical Bayes), with the cost of the excess at DfT values. The map bands every scored site from worst 1% to best 20%.
 
